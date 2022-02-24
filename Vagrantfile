@@ -54,4 +54,4 @@ Vagrant.configure("2") do |config|
             masternode.vm.provision "shell", path: "scripts/slave_master.sh", env: {"INDEX_MASTER": i}
         end 
     end
-  end
+end
