@@ -52,7 +52,6 @@ Vagrant.configure("2") do |config|
                 vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
             end
             masternode.vm.provision "shell", path: "scripts/common.sh"
-            masternode.vm.provision "shell", path: "scripts/slave_master.sh", env: {"INDEX_MASTER": i + 1}
-        end 
+            masternode.vm.provision "shell", path: "scripts/slave_master.sh"
     end
 end
