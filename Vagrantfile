@@ -53,5 +53,6 @@ Vagrant.configure("2") do |config|
             end
             masternode.vm.provision "shell", path: "scripts/common.sh"
             masternode.vm.provision "shell", path: "scripts/slave_master.sh"
+        end 
     end
 end
