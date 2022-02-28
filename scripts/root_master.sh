@@ -2,7 +2,7 @@
 LOAD_BALANCER="10.0.0.10"
 MASTER_NODE="10.0.0.11"
 NODE_NAME=$(hostname -s)
-POD_CIDR="192.168.0.0/16"
+POD_CIDR="192..168.0.0/16"
 sudo kubeadm config images pull
 
 echo "Preflight Check Passed: Downloaded All Required Images"

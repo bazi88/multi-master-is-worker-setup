@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
             vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         end
         masternode.vm.provision "shell", path: "scripts/common.sh"
-        masternode.vm.provision "shell", path: "scripts/root_master.sh"
+        # masternode.vm.provision "shell", path: "scripts/root_master.sh"
     end
 
     # Kubernetes Slave Master Nodes
