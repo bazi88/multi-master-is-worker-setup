@@ -3,9 +3,7 @@ LOAD_BALANCER="10.0.0.10"
 MASTER_NODE="10.0.0.11"
 NODE_NAME=$(hostname -s)
 POD_CIDR="192..168.0.0/16"
-sudo kubeadm config images pull
 
-echo "Preflight Check Passed: Downloaded All Required Images"
 
 sudo kubeadm init  --control-plane-endpoint="$LOAD_BALANCER:6443" --upload-certs --apiserver-advertise-address=$MASTER_NODE --pod-network-cidr=$POD_CIDR
 mkdir -p $HOME/.kube

@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
             vb.cpus = 1
             vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         end
-        loadbalancer.vm.provision "shell", path: "scripts/load_balancer.sh" 
+        # loadbalancer.vm.provision "shell", path: "scripts/load_balancer.sh" 
     end
 
 
@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
                 vb.cpus = 4
                 vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
             end
-            masternode.vm.provision "shell", path: "scripts/common.sh"
+            # masternode.vm.provision "shell", path: "scripts/common.sh"
         end 
     end
 
@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
             vb.cpus = 4
             vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         end
-        masternode.vm.provision "shell", path: "scripts/common.sh"
-        masternode.vm.provision "shell", path: "scripts/root_master.sh"
+        # masternode.vm.provision "shell", path: "scripts/common.sh"
+        # masternode.vm.provision "shell", path: "scripts/root_master.sh"
     end
 end
