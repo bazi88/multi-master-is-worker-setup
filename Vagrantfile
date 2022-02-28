@@ -24,20 +24,7 @@ Vagrant.configure("2") do |config|
         loadbalancer.vm.provision "shell", path: "scripts/load_balancer.sh" 
     end
 
-    # Kubernetes Root Master Nodes
-    config.vm.define "master-node01" do |masternode|
-        masternode.vm.box = "bento/ubuntu-20.04"
-        masternode.vm.hostname = "master-node01"
-        masternode.vm.network "private_network", ip: IP_NW + "11"
-        masternode.vm.provider "virtualbox" do |vb|
-            vb.name = "master-node01"
-            vb.memory = 4096
-            vb.cpus = 4
-            vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-        end
-        masternode.vm.provision "shell", path: "scripts/common.sh"
-        # masternode.vm.provision "shell", path: "scripts/root_master.sh"
-    end
+
 
     # Kubernetes Slave Master Nodes
     (1..NUM_MASTER_NODE).each do |i|
@@ -53,5 +40,21 @@ Vagrant.configure("2") do |config|
             end
             masternode.vm.provision "shell", path: "scripts/common.sh"
         end 
+    end
+
+
+    # Kubernetes Root Master Nodes
+    config.vm.define "master-node01" do |masternode|
+        masternode.vm.box = "bento/ubuntu-20.04"
+        masternode.vm.hostname = "master-node01"
+        masternode.vm.network "private_network", ip: IP_NW + "11"
+        masternode.vm.provider "virtualbox" do |vb|
+            vb.name = "master-node01"
+            vb.memory = 4096
+            vb.cpus = 4
+            vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        end
+        masternode.vm.provision "shell", path: "scripts/common.sh"
+        masternode.vm.provision "shell", path: "scripts/root_master.sh"
     end
 end
