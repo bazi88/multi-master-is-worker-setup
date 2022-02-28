@@ -5,9 +5,9 @@ NODE_NAME=$(hostname -s)
 POD_CIDR="192.168.0.0/16"
 sudo kubeadm config images pull
 
-cat <<EOF | /vagrant/configs/join.sh 
---apiserver-advertise-address=$NODE_NAME
-EOF
+# cat <<EOF | /vagrant/configs/join.sh 
+# --apiserver-advertise-address=$NODE_NAME
+# EOF
 
 /bin/bash /vagrant/configs/join.sh -v
 
