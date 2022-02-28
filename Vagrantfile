@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     # Kubernetes Root Master Nodes
     config.vm.define "master-node01" do |masternode|
         masternode.vm.box = "bento/ubuntu-20.04"
-        masternode.vm.hostname = "master-node01"
+        masternode.vm.hostname = "01"
         masternode.vm.network "private_network", ip: IP_NW + "11"
         masternode.vm.provider "virtualbox" do |vb|
             vb.name = "master-node01"
@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
     (1..NUM_MASTER_NODE).each do |i|
         config.vm.define "master-node0#{i + 1}" do |masternode|
             masternode.vm.box = "bento/ubuntu-20.04"
-            masternode.vm.hostname = "master-node0#{i + 1}"
+            masternode.vm.hostname = "0#{i + 1}"
             masternode.vm.network "private_network", ip: IP_NW + "#{IP_MASTER_START + i}"
             masternode.vm.provider "virtualbox" do |vb|
                 vb.name = "master-node0#{i + 1}"
