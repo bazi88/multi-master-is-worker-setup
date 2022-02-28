@@ -5,24 +5,29 @@ MASTER_NODE="10.0.0.11"
 NODE_NAME=$(hostname -s)
 POD_CIDR="192.168.0.0/16"
 
-# Install Haproxy
-sudo apt update && sudo apt install -y haproxy
+# Create the directory /etc/nginx.
+sudo mkdir /etc/nginx
 
-# Configure haproxy
-cat <<EOF | tee -a /etc/haproxy/haproxy.cfg
-frontend kubernetes-frontend
-    bind 10.0.0.10:6443
-    mode tcp
-    option tcplog
-    default_backend kubernetes-backend
+# Add and edit the file /etc/nginx/nginx.conf.
+cat <<EOF | sudo tee /etc/nginx/nginx.conf
+events { }
 
-backend kubernetes-backend
-    mode tcp
-    option tcp-check
-    balance roundrobin
-    server master-node01 10.0.0.11:6443 check fall 3 rise 2
-    server master-node02 10.0.0.12:6443 check fall 3 rise 2
-    server master-node03 10.0.0.13:6443 check fall 3 rise 2
+stream {
+    upstream stream_backend {
+        least_conn;
+        # REPLACE WITH master1 IP
+        server 10.0.0.11:6443;
+        # REPLACE WITH master2 IP
+        server 10.0.0.12:6443;
+        # REPLACE WITH master3 IP
+        server 10.0.0.12:6443;
+    }
+       
+    server {
+        listen        6443;
+        proxy_pass    stream_backend;
+        proxy_timeout 3s;
+        proxy_connect_timeout 1s;
+    }
+}
 EOF
-
-sudo systemctl restart haproxy
